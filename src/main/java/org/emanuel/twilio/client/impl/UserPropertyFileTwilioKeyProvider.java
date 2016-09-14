@@ -16,7 +16,7 @@ import org.emanuel.twilio.client.api.TwilioKeyProvider;
  */
 public class UserPropertyFileTwilioKeyProvider implements TwilioKeyProvider {
 	
-	UserPropertyFileTwilioKeyProvider() {
+	public UserPropertyFileTwilioKeyProvider() {
 	}
 	
 	private static Path getConfigFileLocation() throws IOException {
