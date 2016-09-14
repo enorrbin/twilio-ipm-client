@@ -1,8 +1,6 @@
 package org.emanuel.twilio.client;
 
-import org.emanuel.twilio.client.api.TwilioKeyProvider;
-import org.emanuel.twilio.client.impl.SimpleMessagingClient;
-import org.emanuel.twilio.client.impl.UserPropertyFileTwilioKeyProvider;
+import org.emanuel.twilio.client.impl.ConsoleMessaging;
 
 /**
  * Twilio Client (cli)
@@ -10,14 +8,12 @@ import org.emanuel.twilio.client.impl.UserPropertyFileTwilioKeyProvider;
  * @author emanuel
  */
 public class Client {
-	
-	private static final TwilioKeyProvider keyProvider = new UserPropertyFileTwilioKeyProvider();
 
 	public static void main( String[] args ) {
-    
-		SimpleMessagingClient client = new SimpleMessagingClient(keyProvider);
+		
+		ConsoleMessaging console = new ConsoleMessaging();
 		try {
-			client.start();
+			console.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

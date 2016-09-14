@@ -8,24 +8,39 @@ public class ConsoleMessaging {
 
 	private final TwilioKeyProvider keyProvider = new UserPropertyFileTwilioKeyProvider();
 	private final Console console;
-	ConsoleMessaging() {
+
+	public ConsoleMessaging() {
 		console = System.console();
 	}
 	
-	void start() throws Exception {
+	public void start() throws Exception {
 		SimpleMessagingClient client = new SimpleMessagingClient(keyProvider);
 		
 		client.setMessageHandler((String msg) -> {
-			// Just write the message to the console
-			console.writer().println(msg);
+			System.out.println("Received message: " + msg);
 		});
 		
 		client.start();
 		
-		// Start reading commands
-		String msg;
-		while( ( msg = console.readLine() ) != null ) {
-			client.sendMessage(msg);
+		// Start reading commands/messages from the console
+		String cmd;
+		while( ( cmd = console.readLine() ) != null ) {
+			if ( cmd.startsWith("/q") ) {
+				break;
+			}
+			else if ( !cmd.isEmpty() ) {
+				try {
+					client.sendMessage(cmd);
+				}
+				catch (Exception e) {
+					System.err.println("Failed to send message: " + e.getMessage());
+				}
+			}
 		}
+		
+		System.out.println("Stopping the client");
+		client.stop();
 	}
+	
+
 }
