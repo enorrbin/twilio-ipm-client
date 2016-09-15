@@ -4,6 +4,12 @@ import java.io.Console;
 
 import org.emanuel.twilio.client.api.TwilioKeyProvider;
 
+/**
+ * Writes messages to the console and sends messages that are typed in to the console.
+ * 
+ * @author emanuel
+ *
+ */
 public class ConsoleMessaging {
 
 	private final TwilioKeyProvider keyProvider = new UserPropertyFileTwilioKeyProvider();
@@ -14,6 +20,9 @@ public class ConsoleMessaging {
 	}
 	
 	public void start() throws Exception {
+		if ( console == null ) {
+			throw new Exception("No console available.");
+		}
 		SimpleMessagingClient client = new SimpleMessagingClient(keyProvider);
 		
 		client.setMessageHandler((String msg) -> {
@@ -36,11 +45,13 @@ public class ConsoleMessaging {
 					System.err.println("Failed to send message: " + e.getMessage());
 				}
 			}
+			// TODO: Could accept other commands such as
+			// /channels - to list channels
+			// /channel name - to switch to a channel
+			// etc.
 		}
 		
 		System.out.println("Stopping the client");
 		client.stop();
 	}
-	
-
 }

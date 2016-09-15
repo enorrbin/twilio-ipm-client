@@ -136,6 +136,7 @@ public class SimpleMessagingClient implements MessagingClient {
 	@Override
 	public void stop() {
 		executor.shutdown();
+		channel = null;
 	}
 	
 	/**

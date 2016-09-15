@@ -11,7 +11,7 @@ import org.emanuel.twilio.client.api.TwilioApiKeys;
 import org.emanuel.twilio.client.api.TwilioKeyProvider;
 
 /**
- * Provides twilio keys from a Java property file like this:
+ * Provides twilio keys from a Java property file like this (fake but realistic example):
  * TWILIO_IPM_SERVICE_SID=IS4aaea52aa770457290b74d50c92ad50e
  * TWILIO_ACCOUNT_SID=AC0cf13fbb8371ad25814f901e5188529f
  * TWILIO_API_KEY=SKede9d2d34e9f170e875c2536cb7833e3

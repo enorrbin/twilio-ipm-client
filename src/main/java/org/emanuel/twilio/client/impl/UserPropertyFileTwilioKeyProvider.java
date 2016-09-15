@@ -12,7 +12,7 @@ import org.emanuel.twilio.client.api.TwilioKeyProvider;
  * Looks in the user's configuration file (~/.twilio/keys) for twilio keys.
  * 
  * @author emanuel
- *
+ *)
  */
 public class UserPropertyFileTwilioKeyProvider implements TwilioKeyProvider {
 	
@@ -25,12 +25,12 @@ public class UserPropertyFileTwilioKeyProvider implements TwilioKeyProvider {
 			throw new IOException("Failed to find user's home directory.");
 		}
 		Path twilioDir = Paths.get(home, ".twilio").normalize();
-		if ( !Files.exists(twilioDir) ) {
-			Files.createDirectory(twilioDir);
-			// TODO: Set user permission to 700.
-		}
 		
-		return Paths.get(twilioDir.toString(), "keys");
+		Path propertyFilePath = Paths.get(twilioDir.toString(), "keys");
+		if ( !Files.isRegularFile(propertyFilePath) ) {
+			throw new IOException("Property configuration file does not exist: " + propertyFilePath.toString());
+		}
+		return propertyFilePath;
 	}
 	
 	public TwilioApiKeys getApiKeys() throws IOException {
