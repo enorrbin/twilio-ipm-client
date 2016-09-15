@@ -23,6 +23,7 @@ public class ConsoleMessaging {
 		if ( console == null ) {
 			throw new Exception("No console available.");
 		}
+		
 		SimpleMessagingClient client = new SimpleMessagingClient(keyProvider);
 		
 		client.setMessageHandler((String msg) -> {
@@ -31,6 +32,7 @@ public class ConsoleMessaging {
 		
 		client.start();
 		
+		System.out.println("Start typing messages. Type /q to exit.");
 		// Start reading commands/messages from the console
 		String cmd;
 		while( ( cmd = console.readLine() ) != null ) {
